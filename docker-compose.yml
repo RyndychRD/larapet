@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+#  php:
+#    container_name: $PROJECT_NAME-php
+#    networks:
+#      -backend-network:
+
+  nginx:
+    container_name: $PROJECT_NAME-nginx
+    image: "nginx:$DOCKER_NGINX_VERSION"
+    volumes:
+      - "$DOCKER_NGINX_LOG:/var/log/nginx"
+      - "$DOCKER_NGINX_CONF:/etc/nginx/conf.d"
+    ports:
+      - "$DOCKER_NGINX_PORT:80"
+    networks:
+      back-network:
+
+#  nodejs:
+#    container_name: $PROJECT_NAME-nginx
+#    networks:
+#      -backend-network:
+
+  postgres:
+    container_name: $PROJECT_NAME-postgres
+    image: "postgres:$DOCKER_DB_VERSION"
+    #Сам инициализирует при отсутствии данных
+    environment:
+      POSTGRES_DB: "$DOCKER_DB_NAME"
+      POSTGRES_USER: "$DOCKER_DB_ROOT_USER"
+      POSTGRES_PASSWORD: "$DOCKER_DB_ROOT_PASSWORD"
+      PGDATA: "/var/lib/postgresql/data"
+    #Включение логов и указание папки
+    command: ["postgres", "-c", "logging_collector=on", "-c", "log_directory=/var/postgres/log"]
+    #Прокидывание пользователя. Важно для home linux систем
+    user: "1000:1000"
+    volumes:
+      - "$DOCKER_DB_DATA:/var/lib/postgresql/data"
+      - "$DOCKER_DB_LOG:/var/postgres/log"
+    ports:
+      - "$DOCKER_DB_PORT:5432"
+    networks:
+      back-network:
+
+networks:
+  back-network:
+  out-network:
+    external: true
