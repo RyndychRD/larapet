@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  #https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-cluster/master/docker-compose.yml
+  redis-node-0:
+    container_name: $PROJECT_NAME-redis-node-0
+    image: bitnami/redis-cluster:6.2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2
+    restart: always
+    networks:
+      - back-network
+
+  redis-node-1:
+    container_name: $PROJECT_NAME-redis-node-1
+    image: bitnami/redis-cluster:6.2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2
+    restart: always
+    networks:
+      - back-network
+
+  redis-node-2:
+    container_name: $PROJECT_NAME-redis-node-2
+    image: bitnami/redis-cluster:6.2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2
+      - REDIS_CLUSTER_CREATOR=yes
+      - REDIS_CLUSTER_REPLICAS=0
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+    restart: always
+    networks:
+      - back-network
+
