@@ -68,9 +68,6 @@ services:
     networks:
       back-network:
 
-#  redis-cluster:
-#    container_name: $PROJECT_NAME-redis-cluster
-
 networks:
   back-network:
     name: $PROJECT_NAME-back-network
