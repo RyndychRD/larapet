@@ -11,5 +11,10 @@
 
 </head>
 <body id="app">
+<div class="mt-8">
+    <div>
+        <increment-counter></increment-counter>
+    </div>
+</div>
 </body>
 </html>

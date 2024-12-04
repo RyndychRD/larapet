@@ -3,5 +3,6 @@ import './bootstrap';
 import {createApp} from 'vue';
 import IncrementCounter from './components/IncrementCounter.vue';
 
-createApp(IncrementCounter)
-    .mount('#app')
+const app = createApp({})
+app.component("increment-counter", IncrementCounter)
+app.mount('#app')
