@@ -7,7 +7,6 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2
-    restart: always
     networks:
       - back-network
 
@@ -17,7 +16,6 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2
-    restart: always
     networks:
       - back-network
 
@@ -32,7 +30,6 @@ services:
     depends_on:
       - redis-node-0
       - redis-node-1
-    restart: always
     networks:
       - back-network
 

@@ -8,14 +8,7 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
-            },
-        }),
+        vue(),
     ],
     resolve: {
         alias: {
@@ -23,6 +16,9 @@ export default defineConfig({
         },
     },
     server: {
-        port: 82
+        // тут необходимо сменить на текущий внешний адрес контейнера с php.
+        // То есть он разворачивает на внешней сети свой сервак, с помощью которого он перегружает js файлы
+        host: '172.22.0.2',
+        port: 90
     }
 });

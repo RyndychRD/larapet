@@ -57,7 +57,7 @@ services:
       POSTGRES_PASSWORD: "$DOCKER_DB_ROOT_PASSWORD"
       PGDATA: "/var/lib/postgresql/data"
     #Включение логов и указание папки
-    command: ["postgres", "-c", "logging_collector=on", "-c", "log_directory=/var/postgres/log"]
+    command: [ "postgres", "-c", "logging_collector=on", "-c", "log_directory=/var/postgres/log" ]
     #Прокидывание пользователя. Важно для home linux систем
     user: "1000:1000"
     volumes:

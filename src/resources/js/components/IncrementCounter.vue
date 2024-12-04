@@ -10,6 +10,6 @@ const counter = ref(0)
         @click="counter++"
         class="p-2 text-white bg-gray-500 rounded"
     >
-        Counter is: {{ counter }}
+        Counter is: {{ counter }}{{ counter }}
     </button>
 </template>
